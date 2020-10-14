@@ -6,19 +6,19 @@ import (
 )
 
 type config struct {
-	ChatWork struct{
+	ChatWork struct {
 		APIKey string `env:"CHATWORK_TOKEN_KEY" envDefault:""`
 		RoomID string `env:"CHATWORK_ROOM_ID" envDefault:""`
 	}
-	ECR struct{
-		Api string `env:"ECR_API" envDefault:""`
-		Bff string `env:"ECR_BFF" envDefault:""`
+	ECR struct {
+		Api      string `env:"ECR_API" envDefault:""`
+		Bff      string `env:"ECR_BFF" envDefault:""`
 		BffNginx string `env:"ECR_BFF_NGINX" envDefault:""`
 	}
-	S3 struct{
-		BukkenName string `env:"S3_BUKKEN_NAME" envDefault:""`
+	S3 struct {
+		BukkenName string `env:"S3_BUCKET_NAME" envDefault:""`
 	}
-	K8s struct{
+	K8s struct {
 		NameSpace string `env:"K8S_NAMESPACE" envDefault:"dev"`
 	}
 }
