@@ -11,12 +11,12 @@ import (
 	"time"
 )
 
-func main()  {
+func main() {
 	config.LoadConfig()
 	queue := list.New()
 	cw := chatwork2.NewChatworkUtil(queue)
 	k8sClient := k8s.NewK8sRunner()
-	tick := time.Tick(1000 * time.Millisecond)
+	tick := time.Tick(5000 * time.Millisecond)
 	tick2 := time.Tick(100 * time.Millisecond)
 	for {
 		select {
@@ -27,7 +27,7 @@ func main()  {
 			if mess.Body != "" {
 				job, err := k8s.JobParse(mess)
 
-				if err!= nil {
+				if err != nil {
 					log.Println(err)
 					cw.ErrorReport(errors.New(fun.GetQuote()), mess)
 					break
@@ -35,7 +35,7 @@ func main()  {
 
 				err = k8sClient.ProcessJobByManifest(job)
 
-				if err!= nil {
+				if err != nil {
 					log.Println(err)
 					cw.ErrorReport(err, mess)
 					break
