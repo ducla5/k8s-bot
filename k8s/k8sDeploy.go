@@ -144,7 +144,7 @@ func (kr *k8sRunner) ProcessJobByManifest(job Job) (err error) {
 		return
 	}
 
-	maxTry := 5
+	maxTry := 10
 
 	for i := 0; i < maxTry; i++ {
 		_, err = kr.clientSet.AppsV1beta1().Deployments(config.C.K8s.NameSpace).Create(context.TODO(), dep, metav1.CreateOptions{})
