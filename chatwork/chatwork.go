@@ -11,8 +11,8 @@ import (
 
 type util struct {
 	queue *list.List
-	cw *chatwork.Client
-	me chatwork.Me
+	cw    *chatwork.Client
+	me    chatwork.Me
 }
 
 type Util interface {
@@ -31,7 +31,7 @@ func NewChatworkUtil(queue *list.List) Util {
 func (u *util) FetchJob() {
 	messages := u.cw.RoomMessages(config.C.ChatWork.RoomID)
 	for _, v := range messages {
-		if strings.Contains(v.Body, fmt.Sprintf("[To:%d]", u.me.AccountId)){
+		if strings.Contains(v.Body, fmt.Sprintf("[To:%d]", u.me.AccountId)) || strings.Contains(v.Body, fmt.Sprintf("[Reply aid=%d", u.me.AccountId)) {
 			u.queue.PushBack(v)
 		}
 	}
@@ -49,12 +49,12 @@ func (u *util) GetJob() chatwork.Message {
 	return job.Value.(chatwork.Message)
 }
 
-func (u *util) ErrorReport(err error, message chatwork.Message)  {
+func (u *util) ErrorReport(err error, message chatwork.Message) {
 	messageBody := fmt.Sprintf("[rp aid=%d to=%s-%s]%s \n%s", message.Account.AccountId, config.C.ChatWork.RoomID, message.MessageId, message.Account.Name, err.Error())
 	u.cw.PostRoomMessage(config.C.ChatWork.RoomID, messageBody)
 }
 
-func (u *util) ResultReport(job k8s.Job, message chatwork.Message)  {
+func (u *util) ResultReport(job k8s.Job, message chatwork.Message) {
 	content := fmt.Sprintf("%s env %s has been updated", job.Source, job.EnvName)
 	messageBody := fmt.Sprintf("[rp aid=%d to=%s-%s]%s \n%s", message.Account.AccountId, config.C.ChatWork.RoomID, message.MessageId, message.Account.Name, content)
 

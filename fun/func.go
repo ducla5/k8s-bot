@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-func GetQuote() string  {
+func GetQuote() string {
 	csvfile, err := os.Open("/bin/fun/quotes.csv")
 	if err != nil {
 		log.Println(err)
@@ -33,18 +33,18 @@ func GetQuote() string  {
 			log.Fatal(err)
 		}
 
-		if record[1] == "" {
+		if record[1] == "" || record[1] == " " {
 			record[1] = "Anonymous"
 		}
 
-		lines = append(lines, map[string]string{"author":record[0], "quote":record[1]})
+		lines = append(lines, map[string]string{"author": record[0], "quote": record[1]})
 	}
 
 	rand.Seed(time.Now().UnixNano())
 
 	min := 0
-	max := len(lines) -1
-	stt := rand.Intn(max - min + 1) + min
+	max := len(lines) - 1
+	stt := rand.Intn(max-min+1) + min
 
 	if lines != nil {
 		return lines[stt]["quote"] + " By " + lines[stt]["author"]
