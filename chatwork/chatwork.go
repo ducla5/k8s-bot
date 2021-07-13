@@ -31,7 +31,7 @@ func NewChatworkUtil(queue *list.List) Util {
 func (u *util) FetchJob() {
 	messages := u.cw.RoomMessages(config.C.ChatWork.RoomID)
 	for _, v := range messages {
-		if strings.Contains(v.Body, fmt.Sprintf("[To:%d]", u.me.AccountId)) || strings.Contains(v.Body, fmt.Sprintf("[Reply aid=%d", u.me.AccountId)) {
+		if strings.Contains(v.Body, fmt.Sprintf("[To:%d]", u.me.AccountId)) || strings.Contains(v.Body, fmt.Sprintf("[rp aid=%d", u.me.AccountId)) {
 			u.queue.PushBack(v)
 		}
 	}
