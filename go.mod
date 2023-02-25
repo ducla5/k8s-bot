@@ -8,8 +8,7 @@ require (
 	github.com/ducla5/go-chatwork v1.1.4
 	github.com/ghodss/yaml v0.0.0-20150909031657-73d445a93680
 	github.com/googleapis/gnostic v0.5.1 // indirect
-	golang.org/x/crypto v0.0.0-20201002170205-7f63de1d35b0 // indirect
-	golang.org/x/net v0.0.0-20201010224723-4f7140c49acb // indirect
+	golang.org/x/crypto v0.1.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20200902213428-5d25da1a8d43 // indirect
 	golang.org/x/time v0.0.0-20200630173020-3af7569d3a1e // indirect
 	gopkg.in/yaml.v2 v2.3.0 // indirect
